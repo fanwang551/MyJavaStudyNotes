@@ -1,24 +1,25 @@
 package JavaDay19__22;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
-
+@SuppressWarnings({"all"})
 public class HashSetExercise02 {
     public static void main(String[] args) {
         HashSet hashSet = new HashSet();
 
-        hashSet.add(new Employee1("zhao",3000,"20010101"));
+        hashSet.add(new Employee1("zhao",3000,new MyDate(2002,2,4)));
+        hashSet.add(new Employee1("sun",4000,new MyDate(2001,5,8)));
+        hashSet.add(new Employee1("zhao",3000,new MyDate(2002,2,8)));
+        hashSet.add(new Employee1("sun",4000,new MyDate(2001,5,8)));
         System.out.println(hashSet);
     }
 }
 class Employee1{
     private String name;
     private double sal;
-    private String birthday;
+    private MyDate birthday;
     //Date date= new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
-    public Employee1(String name, double sal, String birthday) {
+    public Employee1(String name, double sal, MyDate birthday) {
         this.name = name;
         this.sal = sal;
         this.birthday = birthday;
@@ -40,11 +41,11 @@ class Employee1{
         this.sal = sal;
     }
 
-    public String getBirthday() {
+    public MyDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(    MyDate birthday) {
         this.birthday = birthday;
     }
 
@@ -70,4 +71,52 @@ class Employee1{
         return Objects.hash(name, sal, birthday);
     }
 
+}
+class MyDate{
+    private int year;
+    private int month;
+    private int day;
+
+    public MyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyDate myDate = (MyDate) o;
+        return year == myDate.year && month == myDate.month && day == myDate.day;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(year, month, day);
+    }
 }
